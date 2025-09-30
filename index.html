@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="map.css">
+        <script src="map.js"></script>
+        <script src="test.js"></script>
+        <script src="map_fullscreen-logic.js"></script>
+        <script src="map_standby.js"></script>
+        <script src="map_HSHL-Rundgang.js"></script>
+
+        <title>Interaktive Lippstadt-Karte</title>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+
+        <button id="fullscreen_active" onclick="openFullscreen();">Fullscreen aktivieren</button>
+        <button id="fullscreen_deactivate" onclick="closeFullscreen();">Fullscreen deaktivieren</button>
+
+        <div id="yearButtons">
+            <button class="yearButton" data-year="1918" style="border-radius: 50px; width: 70px; height: 70px;"><div style="margin-left: -14px;">1918</div></button>
+            <button class="yearButton" data-year="2005" style="border-radius: 50px; width: 70px; height: 70px;"><div style="margin-left: -14px;">2005</div></button>
+            <button class="yearButton" data-year="2022" style="border-radius: 50px; width: 70px; height: 70px;"><div style="margin-left: -14px;">2022</div></button>
+        </div>
+
+        <!-- <div id="content-window"> </div>
+
+        <button id="hshlRundgang" onclick="openHSHLRundgang();" style="position: absolute; top: 11%; left: 1%; border-radius: 50px; width: 90px; height: 90px;"> <img src="Map_Pointer/Map_Pointer_Red.png" width="50px" height="50px" alt="360-Grad-Rundgang" style="margin-left: -11px;"> </button> -->
+
+        <div>
+            <img src="Lippstadt_Karten\Lippstadt_Plan_1623.jpg" alt="Lippstadt 1623" id="Lipp_1623" width="1000">
+        </div>
+        <div>
+            <img src="Lippstadt_Karten\Lippstadt_Plan_1918.jpeg" alt="Lippstadt 1918" id="Lipp_1918" width="1000">
+        </div>
+        <div>
+            <img src="Lippstadt_Karten\Lippstadt_Plan_2005.jpg" alt="Lippstadt 2005" id="Lipp_2005" width="1000">
+        </div>
+        <div>
+            <img src="Lippstadt_Karten\Lippstadt_Plan_2022.jpg" alt="Lippstadt 2022" id="Lipp_2022" width="1000">
+        </div>
+        <div>
+            <img src="Lippstadt_Karten\Lippstadt_Plan_2025.jpg" alt="Lippstadt 2025" id="Lipp_2025" width="1000">
+        </div>
+
+        <div id="standby-overlay">
+            <div id="standby-text">
+                <strong style="font-size: 300%;"> LIPPSTADT </strong> <br> <br>
+                LICHT <br>
+                WASSER <br>
+                LEBEN <br> <br> <br> <br> <br> <br> <br> <br> <br>
+                <canvas id="standby-canvas"></canvas>
+                <strong style="font-size: 90%;"> PLATZIERE RING </strong>
+            </div>
+        </div>
+
+        <!-- TUIO-Client Bibliotheken -->
+        <script src="tuio_client_js/src/libs/osc-browser.js"></script>
+        <script type="module" src="map_tangible-control.js"></script>
+    </body>
+</html>

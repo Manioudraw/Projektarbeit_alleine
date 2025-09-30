@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Tile-basierte Map mit Zoom - Grau</title>
+<style>
+  body { margin:0; background:#222; }
+  canvas { display:block; width:100vw; height:100vh; cursor:grab; }
+  canvas:active { cursor:grabbing; }
+</style>
+</head>
+<body>
+<canvas id="mapCanvas"></canvas>
+<script>
+const canvas = document.getElementById("mapCanvas");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// 8 Tiles (4 Spalten x 2 Reihen)
+const images = [
+  "Map2024/map2024_08.jpg", "Map2024/map2024_02.jpg", "Map2024/map2024_06.jpg", "Map2024/map2024_05.jpg",
+  "Map2024/map2024_01.jpg", "Map2024/map2024_04.jpg", "Map2024/map2024_07.jpg", "Map2024/map2024_03.jpg"
+];
+
+const loaded = [];
+let count = 0;
+
+// Lade alle Tiles
+images.forEach((src,i)=>{
+  const img = new Image();
+  img.onload = ()=>{ loaded[i]=img; count++; if(count===images.length) draw(); };
+  img.onerror = ()=>{ console.error("Fehler beim Laden:",src); };
+  img.src=src;
+});
+
+// Zoom & Pan Variablen
+let scale = 0.04;      // Start-Zoom
+let offsetX = 0;
+let offsetY = 0;
+let dragging = false;
+let lastX, lastY;
+
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  if(loaded.length < images.length) return;
+
+  const tileWidth = loaded[0].width;
+  const tileHeight = loaded[0].height;
+
+  // 2 Reihen x 4 Spalten
+  for(let r=0;r<2;r++){
+    for(let c=0;c<4;c++){
+      const idx = r*4 + c;
+      const x = c*tileWidth*scale + offsetX;
+      const y = r*tileHeight*scale + offsetY;
+
+      // nur zeichnen, wenn sichtbar im Canvas
+      if(x + tileWidth*scale >= 0 && x <= canvas.width &&
+         y + tileHeight*scale >= 0 && y <= canvas.height){
+        ctx.drawImage(loaded[idx], 0,0, tileWidth, tileHeight, x, y, tileWidth*scale, tileHeight*scale);
+      }
+    }
+  }
+}
+
+// Zoom mit Mausrad
+canvas.addEventListener("wheel", e=>{
+  e.preventDefault();
+  const zoomIntensity = 0.1;
+  const mouseX = e.offsetX;
+  const mouseY = e.offsetY;
+  const wheel = e.deltaY < 0 ? 1 : -1;
+  const zoom = Math.exp(wheel*zoomIntensity);
+
+  // Zoom auf Mausposition
+  offsetX -= (mouseX - offsetX)*(zoom-1);
+  offsetY -= (mouseY - offsetY)*(zoom-1);
+  scale *= zoom;
+  draw();
+});
+
+// Drag zum Verschieben
+canvas.addEventListener("mousedown", e=>{ dragging=true; lastX=e.clientX; lastY=e.clientY; });
+canvas.addEventListener("mousemove", e=>{
+  if(!dragging) return;
+  offsetX += e.clientX - lastX;
+  offsetY += e.clientY - lastY;
+  lastX = e.clientX; lastY = e.clientY;
+  draw();
+});
+canvas.addEventListener("mouseup", ()=>dragging=false);
+canvas.addEventListener("mouseleave", ()=>dragging=false);
+
+// Resize
+window.addEventListener("resize", ()=>{
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  draw();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,370 @@
+:root {
+    --yellow: #FECC00;
+    --orange: #F59C00;
+    --red: #E2061A;
+    --lightgreen: #BCCF02;
+    --green: #009D3C;
+    --blue: #009FE3;
+    --mediumblue: #006FB9;
+    --darkblue: #003E75;
+    --purple: #662382;
+    --black: #000000;
+    --white: #FFFFFF;
+    --gray60: #878787;
+    --gray30: #C6C6C6;
+    --gray15: #E3E3E3;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--white);
+}
+
+button, input[type=submit] {
+    background-color: var(--green);
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    color: var(--black);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+button:hover, input[type=submit]:hover {
+    background-color: var(--white);
+}
+
+form {
+    display: none;
+    position: absolute;
+    background-color: var(--gray15);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px var(--black);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+#Lipp_1623, #Lipp_1918, #Lipp_2005, #Lipp_2022, #Lipp_2025, #fullscreen_deactivate, #menuButton, #quizButton {
+    display: none;
+}
+
+#fullscreen_active {
+    position: absolute;
+    top: 2%;
+    left: 1%;
+}
+
+#menuButton, #quizButton {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+}
+
+#quizButton {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+#exampleText {
+    display: none;
+    position: absolute;
+    background-color: var(--gray15);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px var(--black);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+/* Ab hier: Code für Checkboxen */
+.container, .question {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.question, .answer, .rightAnswer, .wrongAnswer {
+    padding-left: 0px;
+}
+
+.answer, .rightAnswer, .wrongAnswer {
+    display: none;
+}
+
+.rightAnswer.show {
+    color: var(--green);
+}
+
+.wrongAnswer.show {
+    color: var(--red);
+}
+
+.answer.show, .rightAnswer.show, .wrongAnswer.show {
+    display: block;
+    position: relative;
+    margin-bottom: 12px;
+    font-size: 22px;
+}
+
+.answer.show {
+    background-color: var(--gray15);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px var(--black);
+    padding: 12px 16px;
+    z-index: 1;
+    width: 15%;
+}
+  
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: var(--white);
+}
+  
+/* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: var(--blue);
+}
+  
+/* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: var(--blue);
+}
+  
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+/* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--white);
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#language-switcher {
+  position: fixed;
+  bottom: 2%;
+  right: 3%;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: auto;
+  height: 10%;
+}
+
+#language-switcher img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+#menu {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 60%;
+  height: 8%;
+  
+  background: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  transition: height 0.4s ease;
+  cursor: pointer;
+  z-index: 10;
+
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+#menu.menu-expanded {
+  height: 17%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.menu-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#menu.menu-expanded .menu-content {
+  opacity: 1;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s ease;
+  height: 15%;
+  width: 15%;
+  opacity: 1;
+}
+
+.menu-button:hover {
+  transform: scale(1.05);
+  background-color: transparent;
+}
+
+.menu-button img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.menu-button.disabled, .yearButton.disabled {
+  opacity: 0.3;
+}
+
+.menu-button.active {
+  opacity: 1;
+}
+
+.yearButton.active {
+  background-color: var(--white);
+}
+
+#standby-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0, 0, 0, 0.4); 
+  display: none; 
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+  font-size: 2rem;
+  text-align: center;
+}
+
+#standby-text {
+  padding: 20px;
+  background: none;
+  border-radius: 50px;
+}
+
+#standby-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Overlay über dem Canvas */
+#content-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  padding: 20px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  display: none;
+  overflow: auto;
+  scrollbar-color: var(--gray60) var(--gray15);
+  scrollbar-width: none;
+}
+
+/* Oberfläche und Ausrichtung des Videos */
+#video-content {
+  position: relative;
+  width: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Schließen-Knopf */
+#close-video {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  background: none;
+  border: none;
+  color: var(--black);
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+
+.accordion-content {
+  overflow-y: auto;
+  max-height: 100%; /* Begrenzung innerhalb des Eltern-Containers */
+  transition: max-height 0.3s ease;
+  padding: 10px;
+  box-sizing: border-box;
+}
