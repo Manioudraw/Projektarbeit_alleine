@@ -39,22 +39,43 @@ document.addEventListener("DOMContentLoaded", function () {
         buttonsDiv.style.display = "none";
 
         //Abfrage, ob der Kreis eine bestimmte Zeit nicht bewegt wurde, um dann die JahresButtons anzeigen zu lassen
+        // clearTimeout(idleTimer);
+        // idleTimer = setTimeout(() => {
+        //     buttonsDiv.style.position = "absolute";
+        //     if(e.clientX<250) { // Wenn Mauszeiger zu weit links, dann werden Buttons rechts angezeigt.
+        //         buttonsDiv.style.left = `${((e.clientX + 110) / window.innerWidth) * 100}%`;
+        //         buttonsDiv.style.top = `${((e.clientY - 80) / window.innerHeight) * 100}%`;
+        //     }
+        //     else {
+        //         buttonsDiv.style.left = `${((e.clientX - 210) / window.innerWidth) * 100}%`;
+        //         buttonsDiv.style.top = `${((e.clientY - 80) / window.innerHeight) * 100}%`;
+        //     }
+            
+        //     buttonsDiv.style.display = "flex";
+        //     buttonsDiv.style.flexDirection = "column";
+        //     buttonsDiv.style.gap = "10px";
+        // }, 400);
+
         clearTimeout(idleTimer);
         idleTimer = setTimeout(() => {
             buttonsDiv.style.position = "absolute";
-            if(e.clientX<250) { // Wenn Mauszeiger zu weit links, dann werden Buttons rechts angezeigt.
-                buttonsDiv.style.left = `${((e.clientX + 110) / window.innerWidth) * 100}%`;
-                buttonsDiv.style.top = `${((e.clientY - 80) / window.innerHeight) * 100}%`;
+
+            // Prüfen, ob Maus zu weit unten ist
+            const threshold = 200; // z. B. 200px Abstand vom unteren Rand
+            if (e.clientY > window.innerHeight - threshold) {
+                // Maus ist zu weit unten → Buttons ÜBER dem Cursor anzeigen
+                buttonsDiv.style.left = `${((e.clientX - 100) / window.innerWidth) * 100}%`;
+                buttonsDiv.style.top = `${((e.clientY - 190) / window.innerHeight) * 100}%`;
+            } else {
+                // Normalfall → Buttons UNTER dem Cursor anzeigen
+                buttonsDiv.style.left = `${((e.clientX - 100) / window.innerWidth) * 100}%`;
+                buttonsDiv.style.top = `${((e.clientY + 130) / window.innerHeight) * 100}%`;
             }
-            else {
-                buttonsDiv.style.left = `${((e.clientX - 210) / window.innerWidth) * 100}%`;
-                buttonsDiv.style.top = `${((e.clientY - 80) / window.innerHeight) * 100}%`;
-            }
-            
+
             buttonsDiv.style.display = "flex";
-            buttonsDiv.style.flexDirection = "column";
+            buttonsDiv.style.flexDirection = "row";
             buttonsDiv.style.gap = "10px";
-        }, 400);
+        }, 300);
     });
 
 
@@ -157,6 +178,10 @@ function drawMapInCicrle(x, y) {
         if (count_grau === images2024_grau.length) {
             drawMap(loaded2024_grau, images2024_grau);
         }
+
+        // if (count === images2024.length) {
+        //     drawMap(loaded2024, images2024);
+        // }
     }
     
     ctx.restore();
@@ -164,7 +189,7 @@ function drawMapInCicrle(x, y) {
     ctx.beginPath();
     ctx.arc(x, y, zoomRadius, 0, Math.PI * 2, false);
     ctx.lineWidth = 3;
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'yellow';
     ctx.stroke();
 }
 

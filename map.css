@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+
 :root {
     --yellow: #FECC00;
     --orange: #F59C00;
@@ -16,7 +18,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Source Sans 3", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--white);
@@ -29,19 +31,19 @@ button, input[type=submit] {
     color: var(--black);
     padding: 15px 32px;
     text-align: center;
-    text-decoration: none;
+    /* text-decoration: none; */
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
 
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
 button:hover, input[type=submit]:hover {
-    background-color: var(--white);
+    background-color: var(--yellow);
 }
 
 form {
@@ -226,8 +228,8 @@ form {
   cursor: pointer;
   z-index: 10;
 
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
+  /* border-top-left-radius: 50px;
+  border-top-right-radius: 50px; */
 }
 
 #menu.menu-expanded {
@@ -269,7 +271,7 @@ form {
   width: 80px;
   height: 80px;
   object-fit: cover;
-  border-radius: 8px;
+  /* border-radius: 8px; */
 }
 
 .menu-button.disabled, .yearButton.disabled {
@@ -281,7 +283,7 @@ form {
 }
 
 .yearButton.active {
-  background-color: var(--white);
+  background-color: var(--yellow);
 }
 
 #standby-overlay {
@@ -304,7 +306,7 @@ form {
 #standby-text {
   padding: 20px;
   background: none;
-  border-radius: 50px;
+  /* border-radius: 50px; */
 }
 
 #standby-canvas {
@@ -325,7 +327,7 @@ form {
   height: 70%;
   transform: translate(-50%, -50%);
   background: rgba(255, 255, 255, 0.5);
-  border-radius: 50px;
+  /* border-radius: 50px; */
   padding: 20px;
   z-index: 100;
   display: flex;
